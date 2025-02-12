@@ -1,0 +1,6 @@
+# Ignore everything (as a base)
+*
+
+# Allow what we need
+!.gitignore
+!arch/x86/include/generated/uapi/asm/unistd_64.h
