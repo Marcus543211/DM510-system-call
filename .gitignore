@@ -12,6 +12,9 @@
 !arch/x86/include/generated/uapi
 !arch/x86/include/generated/uapi/asm
 !arch/x86/include/generated/uapi/asm/unistd_64.h
+!arch/x86/entry
+!arch/x86/entry/syscalls
+!arch/x86/entry/syscalls/syscall_64.tbl
 !arch/um
 !arch/um/kernel
 !arch/um/kernel/hello_kernel.c
