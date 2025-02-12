@@ -2,5 +2,23 @@
 *
 
 # Allow what we need
-!.gitignore
+!/.gitignore
+!/README
+
+!arch
+!arch/x86
+!arch/x86/include
+!arch/x86/include/generated
+!arch/x86/include/generated/uapi
+!arch/x86/include/generated/uapi/asm
 !arch/x86/include/generated/uapi/asm/unistd_64.h
+!arch/um
+!arch/um/kernel
+!arch/um/kernel/hello_kernel.c
+!arch/um/include
+!arch/um/include
+!arch/um/include/asm
+!arch/um/include/asm/hello_kernel.h
+
+!test
+!test/*
