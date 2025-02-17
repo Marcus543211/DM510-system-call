@@ -17,11 +17,11 @@
 !arch/x86/entry/syscalls/syscall_64.tbl
 !arch/um
 !arch/um/kernel
-!arch/um/kernel/hello_kernel.c
+!arch/um/kernel/dm510_msgbox.c
 !arch/um/include
 !arch/um/include
 !arch/um/include/asm
-!arch/um/include/asm/hello_kernel.h
+!arch/um/include/asm/dm510_msgbox.h
 
 !test
 !test/*

@@ -366,10 +366,11 @@
 #define __NR_cachestat 451
 #define __NR_fchmodat2 452
 #define __NR_map_shadow_stack 453
-#define __NR_hello_kernel 454
+#define __NR_dm510_msgbox_put 454
+#define __NR_dm510_msgbox_get 455
 
 #ifdef __KERNEL__
-#define __NR_syscalls 455
+#define __NR_syscalls 456
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_64_H */
