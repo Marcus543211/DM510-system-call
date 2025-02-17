@@ -91,3 +91,28 @@ Only arround the critical stuff
 Look into the flags
 Maybe it's written weird for cuncurency reasons
 Make sure the message is complete before being read
+
+#### Possible errors to handle
+```
+Error num, Error descriptor
+
+No message on stack when getting:
+74, Not a data message
+42, No message of desired type
+61, No data available
+
+kmalloc returned NULL:
+12, out of memory
+28, no space left on device
+105, No buffer space available
+
+Message too long for buffer:
+90, Message too long
+105, No buffer space available
+
+Bad parameter:
+22, Invalid argument
+
+Bad address:
+14, bad address
+```
