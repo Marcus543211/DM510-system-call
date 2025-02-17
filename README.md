@@ -93,7 +93,6 @@ Maybe it's written weird for cuncurency reasons
 Make sure the message is complete before being read
 
 #### Possible errors to handle
-```
 Error num, Error descriptor
 
 No message on stack when getting:
@@ -115,4 +114,3 @@ Bad parameter:
 
 Bad address:
 14, bad address
-```
