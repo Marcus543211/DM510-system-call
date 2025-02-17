@@ -96,21 +96,20 @@ Make sure the message is complete before being read
 Error num, Error descriptor
 
 #### No message on stack when getting:
-74, Not a data message
-42, No message of desired type
-61, No data available
+- 74, Not a data message
+- 42, No message of desired type
+- 61, No data available
 
 #### kmalloc returned NULL:
-12, out of memory
-28, no space left on device
-105, No buffer space available
+- 12, out of memory
+- 28, no space left on device
 
 #### Message too long for buffer:
-90, Message too long
-105, No buffer space available
+- 90, Message too long
+- 105, No buffer space available
 
 #### Bad parameter:
-22, Invalid argument
+- 22, Invalid argument
 
-Bad address:
-14, bad address
+#### Bad address:
+- 14, bad address
