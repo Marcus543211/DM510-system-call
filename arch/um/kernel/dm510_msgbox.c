@@ -1,6 +1,8 @@
 #include "dm510_msgbox.h"
 #include <stdlib.h>
 #include <string.h>
+#include "linux/slab.h"
+#include "linux/uaccess.h"
 
 typedef struct _msg_t msg_t;
 
