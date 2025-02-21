@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 
     syscall(__NR_dm510_msgbox_put, test, strlen(test)+1);
 
-    syscall(__NR_dm510_msgbox_get, recive, 50);
+    syscall(__NR_dm510_msgbox_get, receive, 50);
 
     printf("%s\n", receive);
 
