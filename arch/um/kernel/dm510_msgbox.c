@@ -1,4 +1,5 @@
 #include "dm510_msgbox.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include "linux/slab.h"
@@ -38,25 +39,18 @@ int dm510_msgbox_put( char *buffer, int length ) {
 int dm510_msgbox_get( char* buffer, int length ) {
   if (length < 0) { return -EINVAL; }
   if (!access_ok(buffer, length)) { return -EFAULT; }
-  if (top != NULL) {
-    msg_t* msg = top;
-    int mlength = msg->length;
-    top = msg->previous;
+  if (top == NULL) { return -ENOMSG; }
+  msg_t* msg = top;
+  top = msg->previous;
+  int mlength = msg->length;
+  if (length < mlength) { return -EMSGSIZE; }
 
-    if (length < mlength) {
-      return -EMSGSIZE;
-    }
+  /* copy message */
+  copy_to_user(buffer, msg->message, mlength);
 
-    /* copy message */
-    copy_to_user(buffer, msg->message, mlength);
+  /* free memory */
+  kfree(msg->message);
+  kfree(msg);
 
-    /* free memory */
-    kfree(msg->message);
-    kfree(msg);
-
-    return mlength;
-  }
-  return -ENOMSG;
-
-
+  return mlength;
 }
