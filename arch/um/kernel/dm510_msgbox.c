@@ -20,8 +20,10 @@ int sys_dm510_msgbox_put( char *buffer, int length ) {
   msg->length = length;
   msg->message = kmalloc(length, GFP_KERNEL);
   if (msg->message == NULL) { kfree(msg); return -ENOMEM; } /* If we get this error we assume that it's because of no mem. We also free the mem we allocated in the first kmalloc */
-  copy_from_user(msg->message, buffer, length);
+  if (copy_from_user(msg->message, buffer, length)) { return -EFAULT; }
 
+  unsigned long flags;
+  local_irq_save(flags);
   if (top == NULL) {
     top = msg;
   } else {
@@ -29,6 +31,8 @@ int sys_dm510_msgbox_put( char *buffer, int length ) {
     msg->previous = top;
     top = msg;
   }
+  local_irq_restore(flags);
+
   return 0;
 }
 
@@ -36,13 +40,18 @@ int sys_dm510_msgbox_get( char* buffer, int length ) {
   if (length < 0) { return -EINVAL; }
   if (!access_ok(buffer, length)) { return -EFAULT; }
   if (top == NULL) { return -ENOMSG; }
+
+  unsigned long flags;
+  local_irq_save(flags);
   msg_t* msg = top;
   top = msg->previous;
+  local_irq_restore(flags);
+
   int mlength = msg->length;
   if (length < mlength) { return -EMSGSIZE; }
 
   /* copy message */
-  copy_to_user(buffer, msg->message, mlength);
+  if (copy_to_user(buffer, msg->message, mlength)) { return -EFAULT; }
 
   /* free memory */
   kfree(msg->message);
