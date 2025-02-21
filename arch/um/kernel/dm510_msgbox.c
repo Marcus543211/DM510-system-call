@@ -18,11 +18,11 @@ int dm510_msgbox_put( char *buffer, int length ) {
   if (length < 0) { return -EINVAL; }
   if (!access_ok(buffer, length)) { return -EFAULT; }
   msg_t* msg = kmalloc(sizeof(msg_t));
-  if (msg == NULL) { return -ENOMEM; } 
+  if (msg == NULL) { return -ENOMEM; } /* If we get this error we assume that it's because of no mem */
   msg->previous = NULL;
   msg->length = length;
   msg->message = kmalloc(length);
-  if (msg->message == NULL) { kfree(msg); return -EFAULT; }
+  if (msg->message == NULL) { kfree(msg); return -ENOMEM; } /* If we get this error we assume that it's because of no mem. We also free the mem we allocated in the first kmalloc */
   copy_from_user(msg->message, buffer, length);
 
   if (top == NULL) {
