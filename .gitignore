@@ -18,6 +18,7 @@
 !arch/um
 !arch/um/kernel
 !arch/um/kernel/dm510_msgbox.c
+!arch/um/kernel/Makefile
 !arch/um/include
 !arch/um/include
 !arch/um/include/asm
