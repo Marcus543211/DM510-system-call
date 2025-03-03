@@ -76,7 +76,12 @@ int sys_dm510_msgbox_get( char* buffer, int length ) {
   int mlength = msg->length;
   // Give a message size error if the message length is greater than the buffer length.
   // Alternatively, we could copy as much as possible.
-  if (length < mlength) { return -EMSGSIZE; }
+  if (length < mlength) {
+    // Free the memory.
+    kfree(msg->message);
+    kfree(msg);
+    return -EMSGSIZE;
+  }
 
   // Copy the message from kernel to user space and give a bad address error on failure.
   if (copy_to_user(buffer, msg->message, mlength)) { return -EFAULT; }
