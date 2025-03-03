@@ -55,13 +55,17 @@ int sys_dm510_msgbox_get( char* buffer, int length ) {
   if (length < 0) { return -EINVAL; }
   // Give a bad address error if the buffer isn't safe to write to.
   if (!access_ok(buffer, length)) { return -EFAULT; }
-  // Give a no message error if the stack is empty.
-  if (top == NULL) { return -ENOMSG; }
 
   // Disable interrupts.
   unsigned long flags;
   local_irq_save(flags);
 
+  // Give a no message error if the stack is empty.
+  if (top == NULL) {
+    // Reenable interrupts before exiting.
+    local_irq_restore(flags);
+    return -ENOMSG;
+  }
   // Take the top message from the stack.
   msg_t* msg = top;
   top = msg->previous;
